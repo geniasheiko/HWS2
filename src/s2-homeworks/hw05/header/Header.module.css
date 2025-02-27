@@ -1,8 +1,40 @@
-.burgerMenuIcon {
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #282c34;
+    color: white;
+    padding: 15px 20px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.header {
+.burgerMenuIcon {
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out;
+}
+
+.burgerMenuIcon:hover {
+    transform: scale(1.1);
 }
 
 .header h1 {
+    font-size: 24px;
+    margin: 0;
+}
+
+.menu {
+    position: absolute;
+    top: 60px;
+    right: 20px;
+    background-color: white;
+    padding: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    display: none; /* Скрыто по умолчанию */
+}
+
+.menu.open {
+    display: block; /* Появляется при открытии */
 }

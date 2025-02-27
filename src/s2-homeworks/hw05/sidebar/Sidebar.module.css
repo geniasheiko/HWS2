@@ -8,6 +8,8 @@
 }
 
 .nav {
+    text-decoration: none;
+    color:blue;
 }
 
 .nav a {
@@ -17,6 +19,8 @@
 }
 
 .nav a.active {
+    color:aqua;
+    text-decoration: underline;
 }
 .close {
 }
