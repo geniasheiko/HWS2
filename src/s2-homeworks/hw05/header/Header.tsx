@@ -1,4 +1,4 @@
-import React, {FC, useState} from 'react'
+import React, {FC} from 'react'
 import burgerIcon from './burger.svg'
 import s from './Header.module.css'
 import {useLocation} from 'react-router-dom'
@@ -10,7 +10,6 @@ type PropsType = {
 
 export const Header: FC<PropsType> = ({handleOpen}) => {
     // hw5-menu изначально отсутствует, при нажатии на бургер - появляется, при повторном нажатии исчезает
-    const [isMenuOpen, setIsMenuOpen] = useState(false);
     const location = useLocation()
     const currentPath = location.pathname
 
@@ -21,10 +20,7 @@ export const Header: FC<PropsType> = ({handleOpen}) => {
                 ? 'Junior'
                 : currentPath === PATH.JUNIOR_PLUS
                     ? 'Junior Plus'
-                    : 'Error';
-                    const handleToggleMenu = () => {
-                        setIsMenuOpen((prev) => !prev);
-                    };
+                    : 'Error'
     return (
         <>
             <div id={'hw5-header'} className={s.header}>
@@ -32,15 +28,10 @@ export const Header: FC<PropsType> = ({handleOpen}) => {
                     src={burgerIcon}
                     id={'hw5-burger-menu'}
                     className={s.burgerMenuIcon}
-                    onClick={handleToggleMenu}
+                    onClick={handleOpen}
                     alt={'open menu'}
                 />
                 <h1>{pageName}</h1>
-            </div>
-            <div id={"hw5-menu"} className={`${s.menu} ${isMenuOpen ? s.open : ""}`}>
-                <p>Пункт 1</p>
-                <p>Пункт 2</p>
-                <p>Пункт 3</p>
             </div>
         </>
     )

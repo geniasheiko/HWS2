@@ -1,14 +1,14 @@
-import React, { useState } from 'react'
-import s from './Stand.module.css'
-import SuperInputText from './common/c1-SuperInputText/SuperInputText'
-import SuperCheckbox from './common/c3-SuperCheckbox/SuperCheckbox'
-import SuperButton from './common/c2-SuperButton/SuperButton'
+import React, {useState} from 'react';
+import s from './Stand.module.css';
+import SuperInputText from './common/c1-SuperInputText/SuperInputText';
+import SuperCheckbox from './common/c3-SuperCheckbox/SuperCheckbox';
+import SuperButton from './common/c2-SuperButton/SuperButton';
 
 const Stand = () => {
-    const [stateForAllInputs, setValue] = useState<string>('')
-    const [error, setError] = useState<string>('')
+    const [stateForAllInputs, setValue] = useState<string>('');
+    const [error, setError] = useState<string>('');
 
-    const [stateForAllCheckboxes, setChecked] = useState<boolean>(false)
+    const [stateForAllCheckboxes, setChecked] = useState<boolean>(false);
 
     return (
         <div id={'hw4-stand'} className={s.stand}>
@@ -33,8 +33,8 @@ const Stand = () => {
                                 stateForAllInputs.trim()
                                     ? ''
                                     : 'Error'
-                            )
-                            setValue('')
+                            );
+                            setValue('');
                         }}
                     />
                 </div>
@@ -67,7 +67,7 @@ const Stand = () => {
                 <div>
                     <SuperButton
                         id={'hw4-super-button-secondary'}
-                        xType={'secondary'}
+                        xType={'secondary'} className={'secondary'}
                     >
                         secondary
                     </SuperButton>
@@ -95,7 +95,7 @@ const Stand = () => {
                 </div>
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default Stand
+export default Stand;
