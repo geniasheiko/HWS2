@@ -4,8 +4,8 @@ import React, {
     InputHTMLAttributes,
     KeyboardEvent,
     ReactNode,
-} from 'react';
-import s from './SuperInputText.module.css';
+} from 'react'
+import s from './SuperInputText.module.css'
 
 // тип пропсов обычного инпута
 type DefaultInputPropsType = DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>,
@@ -25,7 +25,8 @@ const SuperInputText: React.FC<SuperInputTextPropsType> = (
     {
         onChange,
         onChangeText,
-        onKeyPress,
+        onKeyDown,
+       // onKeyPress,
         onEnter,
         error,
         className,
@@ -36,38 +37,44 @@ const SuperInputText: React.FC<SuperInputTextPropsType> = (
     }
 ) => {
     const onChangeCallback = (e: ChangeEvent<HTMLInputElement>) => {
-        onChange && onChange(e);
-        onChangeText && onChangeText(e.currentTarget.value);
-    };
+        onChange?.(e) // если есть пропс onChange, то передать ему е (поскольку onChange не обязателен)
+
+        onChangeText?.(e.currentTarget.value)
+    }
     const onKeyPressCallback = (e: KeyboardEvent<HTMLInputElement>) => {
-        onKeyPress && onKeyPress(e);
-        onEnter && e.key === 'Enter' && onEnter();
-    };
+       // onKeyPress?.(e)
+       onKeyDown?.(e)
+
+        onEnter && // если есть пропс onEnter
+        e.key === 'Enter' && // и если нажата кнопка Enter
+        onEnter() // то вызвать его
+    }
 
     const finalSpanClassName = s.error
-        + (spanClassName ? ' ' + spanClassName : '');
-
-    const finalInputClassName = s.input + ' ' + (error ? s.errorInput : s.superInput) + className ? ' ' + className : '';
+        + (spanClassName ? ' ' + spanClassName : '')
+    const finalInputClassName = s.input
+        + (error ? ' ' + s.errorInput : ' ' + s.superInput)
+        + (className ? ' ' + className : '') // задача на смешивание классов
 
     return (
         <div className={s.inputWrapper}>
+            <input
+                id={id}
+                type={'text'}
+                onChange={onChangeCallback}
+                onKeyDown={onKeyPressCallback}
+                //onKeyPress={onKeyPressCallback}
+                className={finalInputClassName}
+                {...restProps} // отдаём инпуту остальные пропсы если они есть (value например там внутри)
+            />
             <span
                 id={id ? id + '-span' : undefined}
                 className={finalSpanClassName}
             >
                 {error}
             </span>
-            <input
-                id={id}
-                type={'text'}
-                onChange={onChangeCallback}
-                onKeyPress={onKeyPressCallback}
-                className={finalInputClassName}
-                {...restProps} // отдаём инпуту остальные пропсы если они есть (value например там внутри)
-            />
-
         </div>
-    );
-};
+    )
+}
 
-export default SuperInputText;
+export default SuperInputText

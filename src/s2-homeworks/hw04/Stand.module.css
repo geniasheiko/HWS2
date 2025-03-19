@@ -2,20 +2,20 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 40px;
+    width: 1300px;
 }
 
 .inputs {
     display: flex;
     flex-direction: column;
     gap: 48px;
+    margin-left: 20px;
 }
 
 .buttons {
     display: flex;
     flex-direction: column;
     gap: 24px;
-    padding-top: 75px;
 }
 
 .checkboxes {

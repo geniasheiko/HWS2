@@ -1,50 +1,20 @@
 .input:focus {
-    outline-color: #0066CC;
 }
 
 .input {
-    width: 370px;
-    min-height: 35px;
-    border: 1px solid #D1D1D1;
-    border-radius: 5px;
-    padding: 8px 12px;
-    color: #000000;
 }
 
 .inputWrapper {
-    width: 100%;
-    max-width: 400px;
-    padding: 5px;
-    margin-left: 65px;
 }
 
 .superInput {
-    width: 370px;
-    min-height: 35px;
-    border: 1px solid #D1D1D1;
-    border-radius: 5px;
-    padding: 8px 12px;
-    color: #0066CC;
 }
 
 .errorInput {
-    width: 370px;
-    min-height: 35px;
-    border: 1px solid #CC1439;;
-    border-radius: 5px;
-    padding: 8px 12px;
 }
 
 .errorInput:focus {
-    outline-color: #CC0000;
 }
 
 .error {
-    display: block;
-    padding: 5px;
-    font-family: Montserrat sans-serif;
-    font-weight: 400;
-    font-size: 10px;
-    color: #CC1439;
-
 }

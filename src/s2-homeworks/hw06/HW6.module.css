@@ -1,18 +1,19 @@
 .buttonsContainer {
-    margin: 0 0 230px 70px;
-    width: 350px;
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
+    gap: 10px;
 }
 
 .editableSpanContainer {
-    width: 350px;
-    display: flex;
-    flex-direction: row;
-    justify-content: start;
-    align-items: end;
-    margin: 30px 0 25px 0;
-    min-height: 50px;
+    margin-bottom: 20px;
+}
+
+.buttonsContainer button {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.buttonsContainer button:hover {
+    background-color: #f0f0f0;
 }
