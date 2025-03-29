@@ -4,7 +4,7 @@ import {restoreState} from '../hw06/localStorage/localStorage'
 import s from './Clock.module.css'
 
 function Clock() {
-    const [timerId, setTimerId] = useState<ReturnType<typeof setInterval>| undefined>(undefined)
+    const [timerId, setTimerId] = useState<number | undefined>(undefined)
     // for autotests // не менять // можно подсунуть в локалСторэдж нужную дату, чтоб увидеть как она отображается
     const [date, setDate] = useState<Date>(new Date(restoreState('hw9-date', Date.now())))
     const [show, setShow] = useState<boolean>(false)
@@ -13,7 +13,7 @@ function Clock() {
         const id = setInterval(() => {
             setDate(new Date()) 
         }, 1000)
-        setTimerId(id)
+        setTimerId(id as unknown as number)
         // пишут студенты // запустить часы (должно отображаться реальное время, а не +1)
         // сохранить ид таймера (https://learn.javascript.ru/settimeout-setinterval#setinterval)
 
@@ -79,15 +79,15 @@ function Clock() {
                 <SuperButton
                     id={'hw9-button-start'}
                    // disabled={true} // пишут студенты // задизэйблить если таймер запущен
-                   disabled={timerId !== undefined}
+                    disabled={timerId !== undefined}
                    onClick={start}
                 >
                     start
                 </SuperButton>
                 <SuperButton
                     id={'hw9-button-stop'}
-                    disabled={timerId === undefined}
                     //disabled={true} // пишут студенты // задизэйблить если таймер не запущен
+                    disabled={timerId === undefined}
                     onClick={stop}
                 >
                     stop
