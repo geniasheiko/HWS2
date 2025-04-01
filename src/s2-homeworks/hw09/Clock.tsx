@@ -1,6 +1,6 @@
-import React, {useEffect, useState} from 'react'
+import React, { useEffect, useState } from 'react'
 import SuperButton from '../hw04/common/c2-SuperButton/SuperButton'
-import {restoreState} from '../hw06/localStorage/localStorage'
+import { restoreState } from '../hw06/localStorage/localStorage'
 import s from './Clock.module.css'
 
 function Clock() {
@@ -8,11 +8,11 @@ function Clock() {
     // for autotests // не менять // можно подсунуть в локалСторэдж нужную дату, чтоб увидеть как она отображается
     const [date, setDate] = useState<Date>(new Date(restoreState('hw9-date', Date.now())))
     const [show, setShow] = useState<boolean>(false)
-    
+
     useEffect(() => {
         console.log('Время обновилось:', date.toLocaleTimeString());
     }, [date]);
-    
+
     const start = () => {
         console.log('Таймер запущен');
         const id = setInterval(() => {
@@ -20,29 +20,17 @@ function Clock() {
             setDate(new Date());
         }, 1000);
         setTimerId(id as unknown as number);
-        // console.log('Таймер запущен');
-        // setTimerId(
-        //     window.setInterval(() => {
-        //         setDate(new Date()); // Обновляем дату
-        //     }, 1000)
-       
-        // const id = setInterval(() => {
-            //     setDate(new Date()) 
-        // }, 1000)
-        // setTimerId(id as unknown as number)
-        // пишут студенты // запустить часы (должно отображаться реальное время, а не +1)
-        // сохранить ид таймера (https://learn.javascript.ru/settimeout-setinterval#setinterval)
-       // )
+
     }
 
     const stop = () => {
         if (timerId) {
             console.log('Таймер остановлен');
-            clearInterval(timerId)  
-            setTimerId(undefined)  
+            clearInterval(timerId)
+            setTimerId(undefined)
         }
         // пишут студенты // поставить часы на паузу, обнулить ид таймера (timerId <- undefined)
-}
+    }
 
     const onMouseEnter = () => { // пишут студенты // показать дату если наведена мышка
         setShow(true)
@@ -51,9 +39,12 @@ function Clock() {
         setShow(false)
     }
 
-    const stringTime = date.toLocaleTimeString('ru-RU', {hour12: false, minute: '2-digit', hour: '2-digit'  }); 
-    const stringDate = date.toLocaleDateString('ru-RU')  
-    const stringDay = date.toLocaleString('en', { weekday: 'long' })  
+    const stringTime = date.toLocaleTimeString('ru-RU', {
+        hour12: false, hour: '2-digit',
+        minute: '2-digit', second: '2-digit'
+    });
+    const stringDate = date.toLocaleDateString('ru-RU', { day: '2-digit', month: '2-digit', year: 'numeric' })
+    const stringDay = date.toLocaleString('en', { weekday: 'long' })
     const stringMonth = date.toLocaleString('en', { month: 'long' })
 
     // const stringTime = 'date->time' || <br/> // часы24:минуты:секунды (01:02:03)/(23:02:03)/(24:00:00)/(00:00:01) // пишут студенты
@@ -86,7 +77,7 @@ function Clock() {
                         </>
                     ) : (
                         <>
-                            <br/>
+                            <br />
                         </>
                     )}
                 </div>
@@ -95,9 +86,9 @@ function Clock() {
             <div className={s.buttonsContainer}>
                 <SuperButton
                     id={'hw9-button-start'}
-                   // disabled={true} // пишут студенты // задизэйблить если таймер запущен
+                    // disabled={true} // пишут студенты // задизэйблить если таймер запущен
                     disabled={timerId !== undefined}
-                   onClick={start}
+                    onClick={start}
                 >
                     start
                 </SuperButton>
