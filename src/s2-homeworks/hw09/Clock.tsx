@@ -34,8 +34,8 @@ function Clock() {
         setShow(false)
     }
 
-    const stringTime = date.toLocaleTimeString()  
-    const stringDate = date.toLocaleDateString()  
+    const stringTime = date.toLocaleTimeString('ru-RU', {hour12: false, minute: '2-digit', hour: '2-digit'  }); 
+    const stringDate = date.toLocaleDateString('ru-RU')  
     const stringDay = date.toLocaleString('en', { weekday: 'long' })  
     const stringMonth = date.toLocaleString('en', { month: 'long' })
 
