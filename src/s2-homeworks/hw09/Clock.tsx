@@ -10,17 +10,30 @@ function Clock() {
     const [show, setShow] = useState<boolean>(false)
 
     const start = () => {
+        console.log('Таймер запущен');
         const id = setInterval(() => {
-            setDate(new Date()) 
-        }, 1000)
-        setTimerId(id as unknown as number)
+            console.log('Обновление времени', new Date().toLocaleTimeString());
+            setDate(new Date());
+        }, 1000);
+        setTimerId(id as unknown as number);
+        // console.log('Таймер запущен');
+        // setTimerId(
+        //     window.setInterval(() => {
+        //         setDate(new Date()); // Обновляем дату
+        //     }, 1000)
+       
+        // const id = setInterval(() => {
+            //     setDate(new Date()) 
+        // }, 1000)
+        // setTimerId(id as unknown as number)
         // пишут студенты // запустить часы (должно отображаться реальное время, а не +1)
         // сохранить ид таймера (https://learn.javascript.ru/settimeout-setinterval#setinterval)
-
+       // )
     }
 
     const stop = () => {
         if (timerId) {
+            console.log('Таймер остановлен');
             clearInterval(timerId)  
             setTimerId(undefined)  
         }
