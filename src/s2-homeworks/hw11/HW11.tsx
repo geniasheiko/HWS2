@@ -40,6 +40,8 @@ if (Array.isArray(value)) {
                             // сделать так чтоб value1 изменялось // пишет студент
                             value={value1}
                             onChange={change}
+                            min={0}
+                            max={100}
                         />
                     </div>
                     <div className={s.wrapper}>
@@ -48,6 +50,8 @@ if (Array.isArray(value)) {
                             id={'hw11-double-slider'}
                             value={[value1, value2]}
                             onChange={change}
+                            min={0}
+                            max={100}
                             // сделать так чтоб value1/2 изменялось // пишет студент
 
                         />
