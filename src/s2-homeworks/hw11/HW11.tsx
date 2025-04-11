@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import s from './HW11.module.css'
 import s2 from '../../s1-main/App.module.css'
-import { restoreState } from '../hw06/localStorage/localStorage'
+import { restoreState, saveState } from '../hw06/localStorage/localStorage'
 import SuperRange from './common/c7-SuperRange/SuperRange'
 
 /*
@@ -16,16 +16,28 @@ function HW11() {
     const [value2, setValue2] = useState(restoreState<number>('hw11-value2', 100))
 
     const change = (event:Event, value: number | number[]) => {
-        console.log('Updated value1:', value1);
-        console.log('Updated value2:', value2);
-// пишет студент // если пришёл массив - сохранить значения в оба useState, иначе в первый
-if (Array.isArray(value)) {
-    setValue1(value[0])
-    setValue2(value[1])
-} else {
-    setValue1(value)
-}
-    }
+        if (Array.isArray(value)) {
+            let [newValue1, newValue2] = value;
+
+            // Если левый ползунок пересекает правый, меняем их местами
+            if (newValue1 > newValue2) {
+                [newValue1, newValue2] = [newValue2, newValue1];
+            }
+
+            console.log('Updated values:', newValue1, newValue2); // Логируем обновленные значения
+            setValue1(newValue1); // Обновляем первый маркер
+            setValue2(newValue2); // Обновляем второй маркер
+
+            // Сохраняем значения в localStorage
+        saveState('hw11-value1', newValue1);
+        saveState('hw11-value2', newValue2);
+        } else {
+            setValue1(value); // Обновляем одиночный слайдер
+        }
+    };
+    useEffect(() => {
+        console.log('value1:', value1, 'value2:', value2);
+    }, [value1, value2]);
 
     return (
         <div id={'hw11'}>

@@ -20,8 +20,10 @@
     min-width: 50px; /* Минимальная ширина для выравнивания */
     text-align: center; /* Центрируем текст */
 }
+
+#hw11-single-slider,
 #hw11-double-slider {
-    width: 100%; /* Слайдер занимает всю ширину */
-    max-width: 600px; /* Ограничиваем максимальную ширину */
-    margin: 0 auto; /* Центрируем слайдер */
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
 }
