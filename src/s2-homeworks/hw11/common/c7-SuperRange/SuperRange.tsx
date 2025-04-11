@@ -4,6 +4,8 @@ import {Slider, SliderProps} from '@mui/material'
 const SuperRange: React.FC<SliderProps> = (props) => {
     return (
         <Slider
+        value={props.value} // Передаем массив значений
+        onChange={props.onChange} // Вызываем обработчик изменений
             sx={{ // стили для слайдера // пишет студент
                 color: '#00CC22',
                 height: 4,
