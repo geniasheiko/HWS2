@@ -1,29 +1,25 @@
-.container {
-    max-width: 100%; /* Ограничиваем ширину контейнера */
-    width: 100%; /* Контейнер занимает всю ширину */
-    margin: 0 auto; /* Центрируем контейнер */
-    padding: 20px; /* Добавляем отступы */
-    box-sizing: border-box;
-}
 
 .wrapper {
     display: flex; /* Используем flexbox для выравнивания */
     align-items: center; /* Выравниваем элементы по центру */
-    justify-content: space-between; /* Распределяем элементы равномерно */
-    margin-bottom: 20px; /* Отступ между слайдерами */
+    gap: 10px; 
 }
-
 .number {
-    font-size: 18px; /* Размер текста */
-    font-weight: bold; /* Жирный текст */
-    color: #333; /* Темный цвет текста */
-    min-width: 50px; /* Минимальная ширина для выравнивания */
-    text-align: center; /* Центрируем текст */
+    width: 40px; /* Фиксированная ширина, достаточно для 3 цифр */
+    text-align: center;
+    flex-shrink: 0; /* Не уменьшать при нехватке места */
+}
+.slider-container {
+    flex-grow: 1; /* Слайдер занимает всю доступную ширину */
+    max-width: 600px; /* Ограничиваем максимальную ширину */
 }
 
-#hw11-single-slider,
+
+/* #hw11-single-slider,
 #hw11-double-slider {
     width: 100%;
     max-width: 600px;
-    margin: 0 auto;
-}
+    
+    box-sizing: border-box
+} */
+

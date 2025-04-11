@@ -5,11 +5,11 @@ const SuperRange: React.FC<SliderProps> = (props) => {
     return (
         <Slider
         value={props.value} // Передаем массив значений
-        onChange={(event, value, activeThumb) => {
-            console.log('Slider onChange:', value, 'Active thumb:', activeThumb); // Логируем значения
-            props.onChange && props.onChange(event, value, activeThumb); // Вызываем переданный обработчик
-        }}
-       // onChange={props.onChange} // Вызываем обработчик изменений
+        // onChange={(event, value, activeThumb) => {
+        //     console.log('Slider onChange:', value, 'Active thumb:', activeThumb); // Логируем значения
+        //     props.onChange && props.onChange(event, value, activeThumb); // Вызываем переданный обработчик
+        // }}
+        onChange={props.onChange} // Вызываем обработчик изменений
       min={props.min}
       max={props.max}
     

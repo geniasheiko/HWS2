@@ -15,29 +15,19 @@ function HW11() {
     const [value1, setValue1] = useState(restoreState<number>('hw11-value1', 0))
     const [value2, setValue2] = useState(restoreState<number>('hw11-value2', 100))
 
-    const change = (event:Event, value: number | number[]) => {
+    const change = (event: Event, value: number | number[]) => {
         if (Array.isArray(value)) {
-            let [newValue1, newValue2] = value;
-
-            // Если левый ползунок пересекает правый, меняем их местами
-            if (newValue1 > newValue2) {
-                [newValue1, newValue2] = [newValue2, newValue1];
-            }
-
-            console.log('Updated values:', newValue1, newValue2); // Логируем обновленные значения
-            setValue1(newValue1); // Обновляем первый маркер
-            setValue2(newValue2); // Обновляем второй маркер
-
-            // Сохраняем значения в localStorage
-        saveState('hw11-value1', newValue1);
+            const [newValue1, newValue2] = value;
+            setValue1(newValue1);
+            setValue2(newValue2);
+            saveState('hw11-value1', newValue1);
         saveState('hw11-value2', newValue2);
         } else {
-            setValue1(value); // Обновляем одиночный слайдер
+            const newValue1 = value as number;
+            setValue1(newValue1);
+            saveState('hw11-value1', newValue1);
         }
-    };
-    useEffect(() => {
-        console.log('value1:', value1, 'value2:', value2);
-    }, [value1, value2]);
+    }
 
     return (
         <div id={'hw11'}>
@@ -47,6 +37,7 @@ function HW11() {
                 <div className={s.container}>
                     <div className={s.wrapper}>
                         <span id={'hw11-value'} className={s.number}>{value1}</span>
+                        <div className={s.sliderContainer}>
                         <SuperRange
                             id={'hw11-single-slider'}
                             // сделать так чтоб value1 изменялось // пишет студент
@@ -55,18 +46,20 @@ function HW11() {
                             min={0}
                             max={100}
                         />
+                        </div>
                     </div>
                     <div className={s.wrapper}>
                         <span id={'hw11-value-1'} className={s.number}>{value1}</span>
+                        <div className={s.sliderContainer}>
                         <SuperRange
                             id={'hw11-double-slider'}
                             value={[value1, value2]}
                             onChange={change}
                             min={0}
                             max={100}
-                            // сделать так чтоб value1/2 изменялось // пишет студент
-
-                        />
+                        // сделать так чтоб value1/2 изменялось // пишет студент
+ />
+ </div>
                         <span id={'hw11-value-2'} className={s.number}>{value2}</span>
                     </div>
                 </div>
