@@ -41,7 +41,7 @@ const HW13 = () => {
 
                 // дописать
                 setText('...всё ок)')
-                setInfo('...success')
+                setInfo('код 200 - обычно означает что скорее всего всё ок)')
 
             })
             .catch((e) => {
@@ -58,7 +58,7 @@ const HW13 = () => {
                 } else {
                     setCode('Ошибка!')
                     setText('Неизвестная ошибка.')
-                    setInfo('Проверьте консоль для деталей.')
+                    setInfo('Error')
                     setImage(errorUnknown)
                 }
             })
