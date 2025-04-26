@@ -40,13 +40,13 @@ const HW13 = () => {
                 setImage(success200)
 
                 // дописать
-                setText('Успешно!')
+                setText('...всё ок)')
                 setInfo('...success')
 
             })
             .catch((e) => {
                 // дописать
-                if (e.response) {
+                if (e.response?.data) {
                     const status = e.response.status
                     setCode(`Код ${status}!`)
                     setText(e.response.data.errorText || 'Error!')
