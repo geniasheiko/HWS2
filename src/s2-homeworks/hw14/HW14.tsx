@@ -21,6 +21,8 @@ const getTechs = (find: string) => {
         )
         .catch((e) => {
             alert(e.response?.data?.errorText || e.message)
+            //!!
+           // return { data: { techs: [] } }
         })
 }
 
@@ -51,10 +53,11 @@ const HW14 = () => {
     const onChangeText = (value: string) => {
         setFind(value)
         // делает студент
-        setSearchParams({ find: value })
+        const params = Object.fromEntries(searchParams)
+        params.find = value
         // добавить/заменить значение в квери урла
         // setSearchParams(
-
+        setSearchParams({ find: value })
         //
     }
 
