@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
+import SuperDebouncedInput from "./common/c8-SuperDebouncedInput/SuperDebouncedInput";
 import s2 from '../../s1-main/App.module.css'
 import s from './HW14.module.css'
-import axios from 'axios'
-import SuperDebouncedInput from './common/c8-SuperDebouncedInput/SuperDebouncedInput'
-import { useSearchParams } from 'react-router-dom'
 
 /*
 * 1 - дописать функцию onChangeTextCallback в SuperDebouncedInput
@@ -13,65 +13,54 @@ import { useSearchParams } from 'react-router-dom'
 * 5 - добавить HW14 в HW5/pages/JuniorPlus
 * */
 
+
 const getTechs = (find: string) => {
     return axios
         .get<{ techs: string[] }>(
             'https://samurai.it-incubator.io/api/3.0/homework/test2',
             { params: { find } }
         )
-        .catch((e) => {
-            alert(e.response?.data?.errorText || e.message)
-            //!!
-           // return { data: { techs: [] } }
+        .then((res) => {
+            return { data: { techs: res.data.techs.filter((tech) => tech.includes(find)) } }; // Фильтруем данные
         })
-}
+        .catch((e) => {
+            alert(e.response?.data?.errorText || e.message);
+            return { data: { techs: [] } }; // Возвращаем пустой массив techs в случае ошибки
+        });
+};
 
 const HW14 = () => {
-    const [find, setFind] = useState('')
-    const [isLoading, setLoading] = useState(false)
-    const [searchParams, setSearchParams] = useSearchParams()
-    const [techs, setTechs] = useState<string[]>([])
+    const [find, setFind] = useState('');
+    const [isLoading, setLoading] = useState(false);
+    const [searchParams, setSearchParams] = useSearchParams();
+    const [techs, setTechs] = useState<string[]>([]);
 
     const sendQuery = (value: string) => {
-        setLoading(true)
+        setLoading(true);
         getTechs(value)
             .then((res) => {
-                if (res?.data.techs) {
-                    setTechs(res.data.techs)
-                } else {
-                    setTechs([])
-                }
-                // делает студент
-
-                // сохранить пришедшие данные
-
-                //
+                setTechs(res?.data.techs || []); // Устанавливаем только отфильтрованные данные
             })
-            .finally(() => setLoading(false))
-    }
+            .finally(() => setLoading(false));
+    };
 
     const onChangeText = (value: string) => {
-        setFind(value)
-        // делает студент
-        const params = Object.fromEntries(searchParams)
-        params.find = value
-        // добавить/заменить значение в квери урла
-        // setSearchParams(
-        setSearchParams({ find: value })
-        //
-    }
+        setFind(value);
+        setSearchParams({ find: value }); // Обновляем параметры URL
+    };
 
     useEffect(() => {
-        const params = Object.fromEntries(searchParams)
-        sendQuery(params.find || '')
-        setFind(params.find || '')
-    }, [])
+        const params = Object.fromEntries(searchParams); // Преобразуем параметры URL в объект
+        const findValue = params.find || ''; // Если параметр find отсутствует, используем пустую строку
+        sendQuery(findValue); // Загружаем данные
+        setFind(findValue); // Устанавливаем значение в поле ввода
+    }, [searchParams]);
 
-    const mappedTechs = techs.map(t => (
+    const mappedTechs = techs.map((t) => (
         <div key={t} id={'hw14-tech-' + t} className={s.tech}>
             {t}
         </div>
-    ))
+    ));
 
     return (
         <div id={'hw14'}>
@@ -92,7 +81,7 @@ const HW14 = () => {
                 {mappedTechs}
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default HW14
+export default HW14;
