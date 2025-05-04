@@ -64,20 +64,12 @@ const HW14 = () => {
         setFind(value)
         // делает студент
         setSearchParams({ find: value });
-// Реализация debounce
-if (debounceTimer) {
-    clearTimeout(debounceTimer); // Сбрасываем предыдущий таймер
-}
-const timer = setTimeout(() => {
-    sendQuery(value); // Отправляем запрос только после задержки
-}, 500); // Задержка в 500 мс
-setDebounceTimer(timer);
-    }
+ }
 
     useEffect(() => {
         const params = Object.fromEntries(searchParams) //Object.fromEntries(searchParams) превращает его в обычный объект JS,
-        sendQuery(params.find || '')
-        setFind(params.find || '')
+        sendQuery(params.find || '')  // Загружаем данные
+        setFind(params.find || '')    // Устанавливаем значение в поле ввода
     }, [searchParams])
 
     const mappedTechs = techs.map(t => (
