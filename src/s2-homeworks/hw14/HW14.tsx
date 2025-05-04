@@ -36,6 +36,8 @@ const HW14 = () => {
     const [isLoading, setLoading] = useState(false)
     const [searchParams, setSearchParams] = useSearchParams()
     const [techs, setTechs] = useState<string[]>([])
+     // Таймер для debounce
+     const [debounceTimer, setDebounceTimer] = useState<NodeJS.Timeout | null>(null);
 
     const sendQuery = (value: string) => {
         setLoading(true)
@@ -61,12 +63,15 @@ const HW14 = () => {
     const onChangeText = (value: string) => {
         setFind(value)
         // делает студент
-        const params = Object.fromEntries(searchParams)// извлекает текущие параметры из URL и преобразует их в объект
-        params.find = value// обновляет или добавляет параметр 'find' в этот объект
-        // добавить/заменить значение в квери урла
-        // setSearchParams(
-        setSearchParams({ find: value })// заменяет параметры URL, устанавливая 'find' равным введённому значению
-        //
+        setSearchParams({ find: value });
+// Реализация debounce
+if (debounceTimer) {
+    clearTimeout(debounceTimer); // Сбрасываем предыдущий таймер
+}
+const timer = setTimeout(() => {
+    sendQuery(value); // Отправляем запрос только после задержки
+}, 500); // Задержка в 500 мс
+setDebounceTimer(timer);
     }
 
     useEffect(() => {
