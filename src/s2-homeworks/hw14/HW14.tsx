@@ -19,11 +19,7 @@ const getTechs = (find: string) => {
             'https://samurai.it-incubator.io/api/3.0/homework/test2',
             { params: { find } }
         )
-        //!!
-        // .then((res) => {
-        //     // Фильтруем данные на клиенте, если сервер возвращает лишние элементы
-        //     return { data: { techs: res.data.techs.filter((tech) => tech.includes(find)) } };
-        // })
+        
         .catch((e) => {
             alert(e.response?.data?.errorText || e.message)
             //!!
@@ -36,9 +32,7 @@ const HW14 = () => {
     const [isLoading, setLoading] = useState(false)
     const [searchParams, setSearchParams] = useSearchParams()
     const [techs, setTechs] = useState<string[]>([])
-     // Таймер для debounce
-     const [debounceTimer, setDebounceTimer] = useState<NodeJS.Timeout | null>(null);
-
+    
     const sendQuery = (value: string) => {
         setLoading(true)
         getTechs(value)
@@ -57,13 +51,14 @@ const HW14 = () => {
 
                 //
             })
-            .finally(() => setLoading(false))
+            .finally(() => setLoading(false));
+            setFind(''); // Очищаем поле ввода
     }
 
     const onChangeText = (value: string) => {
-        setFind(value)
+        setFind(value) // Обновляем состояние
         // делает студент
-        setSearchParams({ find: value });
+        setSearchParams({ find: value });// Обновляем параметры URL
  }
 
     useEffect(() => {
