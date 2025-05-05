@@ -46,13 +46,10 @@ const HW14 = () => {
                     setTechs([])
                 }
                 // делает студент
-
-                // сохранить пришедшие данные
-
-                //
+ // сохранить пришедшие данные
+ //
             })
             .finally(() => setLoading(false));
-            setFind(''); // Очищаем поле ввода
     }
 
     const onChangeText = (value: string) => {
@@ -96,3 +93,4 @@ const HW14 = () => {
 }
 
 export default HW14
+
