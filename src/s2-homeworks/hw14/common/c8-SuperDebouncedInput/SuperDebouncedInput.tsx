@@ -39,9 +39,11 @@ if (onDebouncedChange) {
             // запустить новый на 1500ms, в котором вызовется функция
           
             const newTimerId = window.setTimeout(() => {
+                console.log('onDebouncedChange', value)
                 onDebouncedChange(value)
             }, 1500)
             setTimerId(newTimerId)
+            console.log('timerId', timerId,newTimerId)
 
         }
     }

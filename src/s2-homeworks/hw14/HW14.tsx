@@ -60,9 +60,9 @@ const HW14 = () => {
 
     useEffect(() => {
         const params = Object.fromEntries(searchParams) //Object.fromEntries(searchParams) превращает его в обычный объект JS,
-        sendQuery(params.find || '')  // Загружаем данные
-        setFind(params.find || '')    // Устанавливаем значение в поле ввода
-    }, [searchParams])
+       sendQuery(params.find || '')  // Загружаем данные
+       setFind(params.find || '')    // Устанавливаем значение в поле ввода
+    }, [])
 
     const mappedTechs = techs.map(t => (
         <div key={t} id={'hw14-tech-' + t} className={s.tech}>
