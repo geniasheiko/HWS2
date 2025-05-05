@@ -40,7 +40,7 @@ if (onDebouncedChange) {
           
             const newTimerId = window.setTimeout(() => {
                 onDebouncedChange(value)
-            }, 5000)
+            }, 1500)
             setTimerId(newTimerId)
 
         }
