@@ -49,6 +49,11 @@ const HW15 = () => {
 
     const sendQuery = (params: any) => {
         setLoading(true)
+////
+          const cleanParams = {
+        ...params,
+        ...(params.sort ? { sort: params.sort } : {}), // если sort есть — добавим
+    }
         getTechs(params)
             .then((res) => {
                 // делает студент
@@ -106,9 +111,18 @@ const HW15 = () => {
 
     useEffect(() => {
         const params = Object.fromEntries(searchParams)
-        sendQuery({ page: params.page, count: params.count })
-        setPage(+params.page || 1)          //+ здесь преобразует строку в число 
-        setCount(+params.count || 4)
+          const actualParams: ParamsType = {
+        page: +params.page || 1,
+        count: +params.count || 4,
+        sort: params.sort || '', // если sort пустой — не передаём
+    }
+
+    setPage(actualParams.page)
+    setCount(actualParams.count)
+    sendQuery(actualParams)
+        // sendQuery({ page: params.page, count: params.count })
+        // setPage(+params.page || 1)          //+ здесь преобразует строку в число 
+        // setCount(+params.count || 4)
     }, [])
 
     const mappedTechs = techs.map(t => (
