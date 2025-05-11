@@ -49,13 +49,10 @@ const HW15 = () => {
 
     const sendQuery = (params: any) => {
         setLoading(true)
-////
-          const cleanParams = {
-        ...params,
-        ...(params.sort ? { sort: params.sort } : {}), // если sort есть — добавим
-    }
+        console.log('sendQuery params:', params)
         getTechs(params)
             .then((res) => {
+                console.log('server response:', res)
                 // делает студент
                 if (res) {
                     setTechs(res.data.techs) // Сохраняем массив технологий в состояние
@@ -80,50 +77,44 @@ const HW15 = () => {
         // Обновляем параметры в URL
         // sendQuery(
         // setSearchParams(
-        setPage(newPage)  // обновляем локальный стейт текущей страницы
-        setCount(newCount)  // обновляем локальный стейт количества элементов на странице
+        // setPage(newPage)  // обновляем локальный стейт текущей страницы
+        // setCount(newCount)  // обновляем локальный стейт количества элементов на странице
 
         const params = {
             sort,
             page: newPage.toString(),
             count: newCount.toString(),
-
-        }
+ }
         setSearchParams(params);  // записываем параметры в URL (в адресной строке браузера)
-        sendQuery({ sort, page: newPage, count: newCount });        // отправляем запрос на сервер с новыми параметрами
+        // sendQuery({ sort, page: newPage, count: newCount });        // отправляем запрос на сервер с новыми параметрами
     }
 
     const onChangeSort = (newSort: string) => {
         // TODO: обновить сортировку и перезапросить данные
         // делает студент
 
-        setSort(newSort)
-        setPage(1) // при сортировке сбрасывать на 1 страницу
+        // setSort(newSort)
+        // setPage(1) // при сортировке сбрасывать на 1 страницу
         const params = {
             sort: newSort,
             page: '1',
             count: count.toString()  // используем текущий count из состояния
         }
-        sendQuery(params)
+        //sendQuery(params)
         setSearchParams(params)
-  //
     }
 
     useEffect(() => {
         const params = Object.fromEntries(searchParams)
-          const actualParams: ParamsType = {
-        page: +params.page || 1,
-        count: +params.count || 4,
-        sort: params.sort || '', // если sort пустой — не передаём
-    }
-
-    setPage(actualParams.page)
-    setCount(actualParams.count)
-    sendQuery(actualParams)
-        // sendQuery({ page: params.page, count: params.count })
-        // setPage(+params.page || 1)          //+ здесь преобразует строку в число 
-        // setCount(+params.count || 4)
-    }, [])
+         sendQuery({ 
+            sort: params.sort || '',
+            page: params.page || 1,
+             count: +params.count || 4,
+             })
+        setPage(+params.page || 1)          //+ здесь преобразует строку в число 
+        setCount(+params.count || 4)
+        setSort(params.sort || "")
+    }, [searchParams])
 
     const mappedTechs = techs.map(t => (
         <div key={t.id} className={s.row}>
